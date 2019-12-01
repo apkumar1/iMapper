@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {useState} from 'react';
 import MapView from 'react-native-maps';
 import {
   Image,
@@ -8,12 +8,16 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TextInput,
   View,
+  Button
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
+  const [destText, setDest] = useState('');
+  const [currText, setCurr] = useState('');
   return (
     <View style={styles.container}>
       <ScrollView
@@ -32,9 +36,7 @@ export default function HomeScreen() {
 
         <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
-          
-          
-          
+        
           
 
           {/* <View
@@ -47,7 +49,42 @@ export default function HomeScreen() {
           </Text> */}
         </View>
 
-        
+        <Text>
+              Current Address
+            </Text>
+            <TextInput
+          style={{height: 40}}
+          placeholder="Enter current location"
+          value={currText}
+          onChange={event => setCurr(event.target.value)}
+          label="Enter location"
+          underlineColorAndroid={'transparent'}
+                autoCapitalize={'none'}
+                autoCorrect={true}
+                enablesReturnKeyAutomatically={false}
+        />
+        <Text style={{padding: 10, fontSize: 42}}>
+          {currText}
+        </Text>
+
+        <Text>
+              Destination Address
+            </Text>
+            <TextInput
+          style={{height: 40}}
+          placeholder="Enter destination location"
+          value={destText}
+          onChange={event =>  { setDest(event.target.value); console.log(event.target.value)}}
+          label="Enter location"
+          underlineColorAndroid={'transparent'}
+          autoCapitalize={'none'}
+          autoCorrect={true}
+          enablesReturnKeyAutomatically={false}
+        />
+        <Text style={{padding: 10, fontSize: 42}}>
+          {destText}
+        </Text>
+          
         
        
 
@@ -59,7 +96,12 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View> */}
       </ScrollView>
-
+      <Button style={{width: '100%',
+    backgroundColor: '#FC3768',
+    paddingTop: 20,
+    paddingBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center'}} title="Search"/> 
       <MapView     
             style={{flex: 1}}    
             initialRegion={{
