@@ -18,6 +18,23 @@ import { MonoText } from '../components/StyledText';
 export default function HomeScreen() {
   const [destText, setDest] = useState('');
   const [currText, setCurr] = useState('');
+  var location = 'kanata'
+  handleSearch = () =>  {
+    const urll = `https://geocoder.api.here.com/6.2/geocode.json?
+    app_id=KokES6GDawldhiT73aQx
+    &app_code=n4lGT8Mrgs18sE-Vr__bQg&searchtext=${location}`
+    fetch(urll ,{
+      method: 'GET',
+      })
+    .then((res) => { console.log(res) ; console.log(res["Response"])})
+    .then((responseJson) => console.log(responseJson))
+      console.log('body', body) 
+      .catch((error) => {
+        console.error(error);
+      });
+    });
+  } ;
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -84,10 +101,6 @@ export default function HomeScreen() {
         <Text style={{padding: 10, fontSize: 42}}>
           {destText}
         </Text>
-          
-        
-       
-
         {/* <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
             <Text style={styles.helpLinkText}>
@@ -101,7 +114,7 @@ export default function HomeScreen() {
     paddingTop: 20,
     paddingBottom: 20,
     justifyContent: 'center',
-    alignItems: 'center'}} title="Search"/> 
+    alignItems: 'center'}} title="Search" onPress={handleSearch}/> 
       <MapView     
             style={{flex: 1}}    
             initialRegion={{
